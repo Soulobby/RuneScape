@@ -1,7 +1,7 @@
 import { URLSearchParams } from "node:url";
 import { request } from "undici";
 
-interface RawPlayerDetail {
+export interface RawPlayerDetail {
 	clan?: string;
 	isSuffix: boolean;
 	name: string;
@@ -9,7 +9,7 @@ interface RawPlayerDetail {
 	title: string;
 }
 
-interface PlayerDetail {
+export interface PlayerDetail {
 	RSN: string;
 	clan: string | null;
 	isSuffix: boolean;
