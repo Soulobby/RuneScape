@@ -10,9 +10,9 @@ export interface RawPlayerDetail {
 }
 
 export interface PlayerDetail {
-	RSN: string;
 	clan: string | null;
 	isSuffix: boolean;
+	name: string;
 	recruiting: boolean | null;
 	title: string | null;
 }
@@ -34,11 +34,11 @@ export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
 
 	const json: RawPlayerDetail[] = JSON.parse(html.slice(html.indexOf("["), html.indexOf("]") + 1));
 
-	return json.map((data) => ({
-		isSuffix: data.isSuffix,
-		recruiting: data.recruiting ?? null,
-		RSN: data.name,
-		clan: data.clan ?? null,
-		title: data.title || null,
+	return json.map(({ isSuffix, recruiting, name, clan, title }) => ({
+		isSuffix,
+		recruiting: recruiting ?? null,
+		name,
+		clan: clan ?? null,
+		title: title || null,
 	}));
 }
