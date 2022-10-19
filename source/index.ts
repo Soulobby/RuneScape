@@ -1,3 +1,4 @@
+import { URLSearchParams } from "node:url";
 import { request } from "undici";
 
 interface RawPlayerDetail {
@@ -11,24 +12,25 @@ interface RawPlayerDetail {
 /**
  * Returns the player's details.
  *
- * @param RSN - The RSN.
- * @returns An object containing the player's details.
+ * @param names - An array of RSNs to check.
+ * @returns An array containing objects of the resulting player details.
  */
-export async function playerDetails(RSN: string) {
-	const html = await request(
-		`https://secure.runescape.com/m=website-data/playerDetails.ws?names=%5B%22${RSN.replaceAll(
-			" ",
-			"_",
-		)}%22%5D&callback=jQuery000000000000000_0000000000&_=0`,
-	).then(async ({ body }) => body.text());
+export async function playerDetails(names: string[]) {
+	const urlSearchParams = new URLSearchParams();
+	urlSearchParams.set("names", JSON.stringify(names.map((name) => name.replaceAll(" ", "_"))));
+	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
 
-	const rawData: RawPlayerDetail = JSON.parse(html.slice(html.indexOf("["), html.indexOf("]") + 1))[0];
+	const html = await request(`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`).then(
+		async ({ body }) => body.text(),
+	);
 
-	return {
-		isSuffix: rawData.isSuffix,
-		recruiting: rawData.recruiting ?? null,
-		RSN: rawData.name,
-		clan: rawData.clan ?? null,
-		title: rawData.title || null,
-	};
+	const json: RawPlayerDetail[] = JSON.parse(html.slice(html.indexOf("["), html.indexOf("]") + 1));
+
+	return json.map((data) => ({
+		isSuffix: data.isSuffix,
+		recruiting: data.recruiting ?? null,
+		RSN: data.name,
+		clan: data.clan ?? null,
+		title: data.title || null,
+	}));
 }
