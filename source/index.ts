@@ -9,13 +9,21 @@ interface RawPlayerDetail {
 	title: string;
 }
 
+interface PlayerDetail {
+	RSN: string;
+	clan: string | null;
+	isSuffix: boolean;
+	recruiting: boolean | null;
+	title: string | null;
+}
+
 /**
  * Returns the player's details.
  *
  * @param names - An array of RSNs to check.
  * @returns An array containing objects of the resulting player details.
  */
-export async function playerDetails(names: string[]) {
+export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("names", JSON.stringify(names.map((name) => name.replaceAll(" ", "_"))));
 	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
