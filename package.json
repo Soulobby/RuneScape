@@ -1,0 +1,39 @@
+{
+	"name": "runescape",
+	"version": "0.0.0",
+	"description": "A library to interact with the RuneScape API.",
+	"keywords": [
+		"RuneScape",
+		"Jagex",
+		"RS3"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Soulobby/RuneScape"
+	},
+	"license": "MIT",
+	"author": "Jiralite",
+	"type": "module",
+	"main": "./sourceJS/index.js",
+	"types": "./sourceJS/index.d.ts",
+	"files": [
+		"sourceJS/**/*.js",
+		"sourceJS/**/*.d.ts",
+		"sourceJS/**/*.js.map"
+	],
+	"scripts": {
+		"build": "npm install && tsc",
+		"format": "prettier --write . && eslint --fix .",
+		"test": "prettier --check . && eslint . && tsc"
+	},
+	"devDependencies": {
+		"@jiralite/eslint-config-neon": "^0.1.36",
+		"@types/node": "^18.11.2",
+		"eslint": "^8.25.0",
+		"prettier": "^2.7.1",
+		"typescript": "^4.8.4"
+	},
+	"dependencies": {
+		"undici": "^5.11.0"
+	}
+}
