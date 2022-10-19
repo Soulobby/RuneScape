@@ -9,11 +9,33 @@ interface RawPlayerDetail {
 	title: string;
 }
 
+/**
+ * Represents some basic information about a player.
+ */
 export interface PlayerDetail {
+	/**
+	 * The clan of the player.
+	 */
 	clan: string | null;
+	/**
+	 * Whether the title is suffixed.
+	 *
+	 * @remarks Since {@link title} appears to always be `null`, this also appears to always be `false`.
+	 */
 	isSuffix: boolean;
+	/**
+	 * The name of the player.
+	 */
 	name: string;
+	/**
+	 * Whether the player's clan is set to display that they are recruiting.
+	 */
 	recruiting: boolean | null;
+	/**
+	 * The title of the player.
+	 *
+	 * @remarks This appears to always be `null`.
+	 */
 	title: string | null;
 }
 
