@@ -61,6 +61,6 @@ export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
 		recruiting: recruiting ?? null,
 		name,
 		clan: clan ?? null,
-		title: title || null,
+		title: title === "" ? null : title,
 	}));
 }
