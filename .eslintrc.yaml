@@ -16,3 +16,5 @@ extends:
 plugins:
   - "@typescript-eslint"
 reportUnusedDisableDirectives: true
+rules:
+  jsdoc/check-param-names: 0
