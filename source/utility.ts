@@ -3,6 +3,7 @@
  *
  * @param name - The name to transform.
  * @returns The transformed name.
+ * @internal
  */
 
 export function transformName(name: string) {
