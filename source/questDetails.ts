@@ -427,7 +427,7 @@ export interface QuestDetail {
 /**
  * Returns the player's quest data.
  *
- * @param name - The name of the player.
+ * @param name - The name of the player
  * @returns An object containing the quest data.
  */
 export async function questDetails(name: string): Promise<QuestDetail> {

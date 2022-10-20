@@ -43,7 +43,7 @@ export interface PlayerDetail {
 /**
  * Returns the player's details.
  *
- * @param names - An array of player names to check.
+ * @param names - An array of player names to check
  * @returns An array containing the resulting player details.
  */
 export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
