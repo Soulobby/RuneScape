@@ -27,6 +27,7 @@
 		"test": "prettier --check . && eslint . && tsc"
 	},
 	"dependencies": {
+		"dayjs": "^1.11.5",
 		"undici": "^5.11.0"
 	},
 	"devDependencies": {
