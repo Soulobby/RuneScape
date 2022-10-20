@@ -3,7 +3,7 @@ import { request } from "undici";
 import { transformName } from "./utility.js";
 
 interface RawQuestDetail {
-	loggedIn: "false" | "true";
+	loggedIn: "true" | "false";
 	quests: Quest[];
 }
 
