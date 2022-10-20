@@ -36,8 +36,8 @@ const enum ProfileErrorType {
  *
  * @internal
  */
-interface ProfileError<T extends ProfileErrorType = ProfileErrorType> {
-	error: T;
+interface ProfileError {
+	error: ProfileErrorType;
 	loggedIn: "false";
 }
 
