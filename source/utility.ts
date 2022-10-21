@@ -1,14 +1,14 @@
 import { URLSearchParams } from "node:url";
 
 /**
- * Transforms a name into a variant that is able to be safely sent to the API.
+ * Transforms a name into a variant that is able to be safely sent to an API.
  *
  * @param name - The name to transform
  * @returns The transformed name.
  * @internal
  */
 export function transformName(name: string) {
-	return name.replaceAll(" ", "_");
+	return name.replaceAll(" ", "+");
 }
 
 /**
@@ -88,5 +88,56 @@ export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions)
 			return `https://www.runeclan.com/clan/${clan}`;
 		case ClanPage.RunePixels:
 			return `https://runepixels.com/clans/${clan}/about`;
+	}
+}
+
+/**
+ * Represents what may provide a player's page.
+ */
+export enum PlayerPage {
+	RuneScape = "RuneScape",
+	RuneMetrics = "RuneMetrics",
+	RuneTracker = "RuneTracker",
+	RuneClan = "RuneClan",
+	RunePixels = "Runepixels",
+}
+
+/**
+ * Represents the options to provide for retrieving a player's page.
+ */
+export interface PlayerPageOptions {
+	/**
+	 * The player's name.
+	 */
+	name: string;
+	/**
+	 * Where the player's page should be retrieved from.
+	 *
+	 * @defaultValue `PlayerPage.RuneScape`
+	 */
+	source?: PlayerPage;
+}
+
+/**
+ * Retrieves a player's page.
+ *
+ * @param options - The options to provide
+ * @returns A link to the player's page.
+ */
+export function playerPage({ name, source = PlayerPage.RuneScape }: PlayerPageOptions) {
+	switch (source) {
+		case PlayerPage.RuneScape:
+			// eslint-disable-next-line no-case-declarations
+			const urlSearchParams = new URLSearchParams();
+			urlSearchParams.set("user1", name);
+			return `https://secure.runescape.com/m=hiscore/compare?${urlSearchParams}`;
+		case PlayerPage.RuneMetrics:
+			return `https://apps.runescape.com/runemetrics/app/overview/player/${name}`;
+		case PlayerPage.RuneTracker:
+			return `https://runetracker.org/track-${transformName(name)}`;
+		case PlayerPage.RuneClan:
+			return `https://www.runeclan.com/user/${name}`;
+		case PlayerPage.RunePixels:
+			return `https://runepixels.com/players/${name}/skills`;
 	}
 }

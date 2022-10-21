@@ -1,6 +1,5 @@
 import { URLSearchParams } from "node:url";
 import { request } from "undici";
-import { transformName } from "./utility.js";
 
 interface RawPlayerDetail {
 	clan?: string;
@@ -48,7 +47,7 @@ export interface PlayerDetail {
  */
 export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
 	const urlSearchParams = new URLSearchParams();
-	urlSearchParams.set("names", JSON.stringify(names.map((name) => transformName(name))));
+	urlSearchParams.set("names", JSON.stringify(names));
 	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
 
 	const html = await request(`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`).then(

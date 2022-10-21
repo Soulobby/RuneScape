@@ -2,7 +2,6 @@ import { URLSearchParams } from "node:url";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import { request } from "undici";
-import { transformName } from "./utility.js";
 
 interface RawProfile {
 	magic: number;
@@ -240,7 +239,7 @@ dayjs.extend(utc);
  */
 export async function profile({ name, activities }: ProfileOptions): Promise<Profile> {
 	const urlSearchParams = new URLSearchParams();
-	urlSearchParams.set("user", transformName(name));
+	urlSearchParams.set("user", name);
 	if (typeof activities === "number") urlSearchParams.set("activities", String(activities));
 
 	const json = (await request(`https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}`).then(

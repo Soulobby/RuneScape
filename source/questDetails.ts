@@ -1,6 +1,5 @@
 import { URLSearchParams } from "node:url";
 import { request } from "undici";
-import { transformName } from "./utility.js";
 
 interface RawQuestDetail {
 	loggedIn: "true" | "false";
@@ -432,7 +431,7 @@ export interface QuestDetail {
  */
 export async function questDetails(name: string): Promise<QuestDetail> {
 	const urlSearchParams = new URLSearchParams();
-	urlSearchParams.set("user", transformName(name));
+	urlSearchParams.set("user", name);
 
 	const { quests, loggedIn } = (await request(`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`).then(
 		async ({ body }) => body.json(),
