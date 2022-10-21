@@ -75,7 +75,7 @@ export interface ClanPageOptions {
 }
 
 /**
- * Retrieves the clan page of a clan.
+ * Retrieves a clan page.
  *
  * @param options - The options to provide
  * @returns A link to a clan's home page.
