@@ -410,7 +410,7 @@ export interface Quest {
 /**
  * Represents data about a player's returned quests.
  */
-export interface QuestDetail {
+export interface QuestDetails {
 	/**
 	 * Whether the player is signed in to RuneMetrics.
 	 *
@@ -424,18 +424,33 @@ export interface QuestDetail {
 }
 
 /**
+ * Represents the options to provide for fetching a player's quest data.
+ */
+export interface QuestDetailsOptions {
+	/**
+	 * The player's name.
+	 */
+	name: string;
+	/**
+	 * The options for the request.
+	 */
+	requestOptions?: Parameters<typeof request>[1];
+}
+
+/**
  * Returns the player's quest data.
  *
- * @param name - The name of the player
+ * @param options - The options to provide
  * @returns An object containing the quest data.
  */
-export async function questDetails(name: string): Promise<QuestDetail> {
+export async function questDetails({ name, requestOptions }: QuestDetailsOptions): Promise<QuestDetails> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 
-	const { quests, loggedIn } = (await request(`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`).then(
-		async ({ body }) => body.json(),
-	)) as RawQuestDetail;
+	const { quests, loggedIn } = (await request(
+		`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`,
+		requestOptions,
+	).then(async ({ body }) => body.json())) as RawQuestDetail;
 
 	return {
 		quests,

@@ -214,7 +214,7 @@ export interface Profile {
 }
 
 /**
- * Represents the options to provide for fetching the RuneMetrics profile.
+ * Represents the options to provide for fetching a RuneMetrics profile.
  */
 export interface ProfileOptions {
 	/**
@@ -227,6 +227,10 @@ export interface ProfileOptions {
 	 * @remarks 20 is the maximum number this limit abides by.
 	 */
 	activities?: number;
+	/**
+	 * The options for the request.
+	 */
+	requestOptions?: Parameters<typeof request>[1];
 }
 
 dayjs.extend(utc);
@@ -237,14 +241,15 @@ dayjs.extend(utc);
  * @param options - The options to provide
  * @returns The profile of the player as described by RuneMetrics.
  */
-export async function profile({ name, activities }: ProfileOptions): Promise<Profile> {
+export async function profile({ name, activities, requestOptions }: ProfileOptions): Promise<Profile> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 	if (typeof activities === "number") urlSearchParams.set("activities", String(activities));
 
-	const json = (await request(`https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}`).then(
-		async ({ body }) => body.json(),
-	)) as RawProfile | ProfileError;
+	const json = (await request(
+		`https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}`,
+		requestOptions,
+	).then(async ({ body }) => body.json())) as RawProfile | ProfileError;
 
 	if ("error" in json) {
 		throw new Error(json.error);

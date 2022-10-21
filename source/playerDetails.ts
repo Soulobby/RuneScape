@@ -40,19 +40,34 @@ export interface PlayerDetail {
 }
 
 /**
- * Returns the player's details.
+ * Represents the options to provide for fetching player profiles.
+ */
+export interface PlayerDetailsOptions {
+	/**
+	 * An array of player names.
+	 */
+	names: string[];
+	/**
+	 * The options for the request.
+	 */
+	requestOptions?: Parameters<typeof request>[1];
+}
+
+/**
+ * Returns player details.
  *
- * @param names - An array of player names to check
+ * @param options - The options to provide
  * @returns An array containing the resulting player details.
  */
-export async function playerDetails(names: string[]): Promise<PlayerDetail[]> {
+export async function playerDetails({ names, requestOptions }: PlayerDetailsOptions): Promise<PlayerDetail[]> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("names", JSON.stringify(names));
 	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
 
-	const html = await request(`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`).then(
-		async ({ body }) => body.text(),
-	);
+	const html = await request(
+		`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`,
+		requestOptions,
+	).then(async ({ body }) => body.text());
 
 	const json: RawPlayerDetail[] = JSON.parse(html.slice(html.indexOf("["), html.indexOf("]") + 1));
 
