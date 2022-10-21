@@ -55,7 +55,7 @@ export function avatar({ name, width, height }: AvatarOptions) {
 export enum ClanPage {
 	RuneScape = "RuneScape",
 	RuneClan = "RuneClan",
-	Runepixels = "Runepixels",
+	RunePixels = "Runepixels",
 }
 
 /**
@@ -86,7 +86,7 @@ export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions)
 			return `https://services.runescape.com/m=clan-home/clan/${clan}`;
 		case ClanPage.RuneClan:
 			return `https://www.runeclan.com/clan/${clan}`;
-		case ClanPage.Runepixels:
+		case ClanPage.RunePixels:
 			return `https://runepixels.com/clans/${clan}/about`;
 	}
 }
