@@ -48,3 +48,45 @@ export function avatar({ name, width, height }: AvatarOptions) {
 		String(urlSearchParams) ? `?${urlSearchParams}` : ""
 	}`;
 }
+
+/**
+ * Represents what may provide a clan page.
+ */
+export enum ClanPage {
+	RuneScape = "RuneScape",
+	RuneClan = "RuneClan",
+	Runepixels = "Runepixels",
+}
+
+/**
+ * Represents the options to provide for retrieving a clan page.
+ */
+export interface ClanPageOptions {
+	/**
+	 * The clan.
+	 */
+	clan: string;
+	/**
+	 * Where the clan page should be retrieved from.
+	 *
+	 * @defaultValue `ClanPage.RuneScape`
+	 */
+	source?: ClanPage;
+}
+
+/**
+ * Retrieves the clan page of a clan.
+ *
+ * @param options - The options to provide
+ * @returns A link to a clan's home page.
+ */
+export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions) {
+	switch (source) {
+		case ClanPage.RuneScape:
+			return `https://services.runescape.com/m=clan-home/clan/${clan}`;
+		case ClanPage.RuneClan:
+			return `https://www.runeclan.com/clan/${clan}`;
+		case ClanPage.Runepixels:
+			return `https://runepixels.com/clans/${clan}/about`;
+	}
+}
