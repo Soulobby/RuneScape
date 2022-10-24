@@ -2,7 +2,7 @@ import { URLSearchParams } from "node:url";
 import { request } from "undici";
 
 interface RawQuestDetail {
-	loggedIn: "true" | "false";
+	loggedIn: `${boolean}`;
 	quests: Quest[];
 }
 

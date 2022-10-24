@@ -17,7 +17,7 @@ interface RawProfile {
 	rank: string | null;
 	melee: number;
 	combatlevel: number;
-	loggedIn: "true" | "false";
+	loggedIn: `${boolean}`;
 }
 
 /**
