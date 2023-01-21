@@ -1,11 +1,14 @@
 name: Test
-on: pull_request
+on: [pull_request, push]
 jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Check for typographical errors
+        uses: crate-ci/typos@master
 
       - name: Install Node.js 16
         uses: actions/setup-node@v3

@@ -1,0 +1,5 @@
+[default.extend-identifiers]
+HerosWelcome = "HerosWelcome"
+
+[default.extend-words]
+Ket = "Ket"
