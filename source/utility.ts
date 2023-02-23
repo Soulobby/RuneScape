@@ -54,7 +54,6 @@ export function avatar({ name, width, height }: AvatarOptions) {
  */
 export enum ClanPage {
 	RuneScape = "RuneScape",
-	RuneClan = "RuneClan",
 	RunePixels = "Runepixels",
 }
 
@@ -84,8 +83,6 @@ export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions)
 	switch (source) {
 		case ClanPage.RuneScape:
 			return `https://services.runescape.com/m=clan-home/clan/${clan}`;
-		case ClanPage.RuneClan:
-			return `https://www.runeclan.com/clan/${clan}`;
 		case ClanPage.RunePixels:
 			return `https://runepixels.com/clans/${clan}/about`;
 	}
@@ -98,7 +95,6 @@ export enum PlayerPage {
 	RuneScape = "RuneScape",
 	RuneMetrics = "RuneMetrics",
 	RuneTracker = "RuneTracker",
-	RuneClan = "RuneClan",
 	RunePixels = "Runepixels",
 }
 
@@ -135,8 +131,6 @@ export function playerPage({ name, source = PlayerPage.RuneScape }: PlayerPageOp
 			return `https://apps.runescape.com/runemetrics/app/overview/player/${name}`;
 		case PlayerPage.RuneTracker:
 			return `https://runetracker.org/track-${transformName(name)}`;
-		case PlayerPage.RuneClan:
-			return `https://www.runeclan.com/user/${name}`;
 		case PlayerPage.RunePixels:
 			return `https://runepixels.com/players/${name}/skills`;
 	}
