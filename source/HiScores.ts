@@ -39,9 +39,21 @@ export enum Skill {
  * Represents the data of a HiScore skill.
  */
 export interface HiScoreSkill<T extends "Total" | Skill> {
+	/**
+	 * The name of the skill.
+	 */
 	name: T;
+	/**
+	 * The rank of the skill.
+	 */
 	rank: number;
+	/**
+	 * The level of the skill.
+	 */
 	level: number;
+	/**
+	 * The total experience of the skill.
+	 */
 	totalXP: number;
 }
 
@@ -49,34 +61,121 @@ export interface HiScoreSkill<T extends "Total" | Skill> {
  * Represents a player's HiScore data.
  */
 export interface HiScore {
+	/**
+	 * Total skill data.
+	 */
 	total: HiScoreSkill<"Total">;
+	/**
+	 * Attack skill data.
+	 */
 	attack: HiScoreSkill<Skill.Attack>;
+	/**
+	 * Defence skill data.
+	 */
 	defence: HiScoreSkill<Skill.Defence>;
+	/**
+	 * Strength skill data.
+	 */
 	strength: HiScoreSkill<Skill.Strength>;
+	/**
+	 * Constitution skill data.
+	 */
 	constitution: HiScoreSkill<Skill.Constitution>;
+	/**
+	 * Ranged skill data.
+	 */
 	ranged: HiScoreSkill<Skill.Ranged>;
+	/**
+	 * Prayer skill data.
+	 */
 	prayer: HiScoreSkill<Skill.Prayer>;
+	/**
+	 * Magic skill data.
+	 */
 	magic: HiScoreSkill<Skill.Magic>;
+	/**
+	 * Cooking skill data.
+	 */
 	cooking: HiScoreSkill<Skill.Cooking>;
+	/**
+	 * Woodcutting skill data.
+	 */
 	woodcutting: HiScoreSkill<Skill.Woodcutting>;
+	/**
+	 * Fletching skill data.
+	 */
 	fletching: HiScoreSkill<Skill.Fletching>;
+	/**
+	 * Fishing skill data.
+	 */
 	fishing: HiScoreSkill<Skill.Fishing>;
+	/**
+	 * Firemaking skill data.
+	 */
 	firemaking: HiScoreSkill<Skill.Firemaking>;
+	/**
+	 * Crafting skill data.
+	 */
 	crafting: HiScoreSkill<Skill.Crafting>;
+	/**
+	 * Smithing skill data.
+	 */
 	smithing: HiScoreSkill<Skill.Smithing>;
+	/**
+	 * Mining skill data.
+	 */
 	mining: HiScoreSkill<Skill.Mining>;
+	/**
+	 * Herblore skill data.
+	 */
 	herblore: HiScoreSkill<Skill.Herblore>;
+	/**
+	 * Agility skill data.
+	 */
 	agility: HiScoreSkill<Skill.Agility>;
+	/**
+	 * Thieving skill data.
+	 */
 	thieving: HiScoreSkill<Skill.Thieving>;
+	/**
+	 * Slayer skill data.
+	 */
 	slayer: HiScoreSkill<Skill.Slayer>;
+	/**
+	 * Farming skill data.
+	 */
 	farming: HiScoreSkill<Skill.Farming>;
+	/**
+	 * Runecrafting skill data.
+	 */
 	runecrafting: HiScoreSkill<Skill.Runecrafting>;
+	/**
+	 * Hunter skill data.
+	 */
 	hunter: HiScoreSkill<Skill.Hunter>;
+	/**
+	 * Construction skill data.
+	 */
 	construction: HiScoreSkill<Skill.Construction>;
+	/**
+	 * Summoning skill data.
+	 */
 	summoning: HiScoreSkill<Skill.Summoning>;
+	/**
+	 * Dungeoneering skill data.
+	 */
 	dungeoneering: HiScoreSkill<Skill.Dungeoneering>;
+	/**
+	 * Divination skill data.
+	 */
 	divination: HiScoreSkill<Skill.Divination>;
+	/**
+	 * Invention skill data.
+	 */
 	invention: HiScoreSkill<Skill.Invention>;
+	/**
+	 * Archaeology skill data.
+	 */
 	archaeology: HiScoreSkill<Skill.Archaeology>;
 }
 
