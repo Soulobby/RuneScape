@@ -76,7 +76,7 @@ export interface ProfileActivity {
 /**
  * Represents the enumeration of skills as returned from the API.
  */
-export enum Skill {
+export enum SkillId {
 	Attack,
 	Defence,
 	Strength,
@@ -129,9 +129,9 @@ export interface ProfileSkills {
 	/**
 	 * The id of this skill.
 	 *
-	 * @remarks This is the specific number belonging to a skill. The {@link Skill} enumeration may help here.
+	 * @remarks This is the specific number belonging to a skill. The {@link SkillId} enumeration may help here.
 	 */
-	id: Skill;
+	id: SkillId;
 }
 
 /**
