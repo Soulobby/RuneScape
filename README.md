@@ -1,3 +1,3 @@
 # RuneScape
 
-This repository interacts with the RuneScape API.
+This repository interacts with the non-existent RuneScape API.
