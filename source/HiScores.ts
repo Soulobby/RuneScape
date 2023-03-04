@@ -35,7 +35,10 @@ export enum Skill {
 	Archaeology = "Archaeology",
 }
 
-interface HiScoreSkill<T extends "Total" | Skill> {
+/**
+ * Represents the data of a HiScore skill.
+ */
+export interface HiScoreSkill<T extends "Total" | Skill> {
 	name: T;
 	rank: number;
 	level: number;
