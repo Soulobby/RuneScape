@@ -4,11 +4,12 @@ import { URLSearchParams } from "node:url";
  * Transforms a name into a variant that is able to be safely sent to an API.
  *
  * @param name - The name to transform
+ * @param delimiter - The delimiter to use
  * @returns The transformed name.
  * @internal
  */
-export function transformName(name: string) {
-	return name.replaceAll(" ", "+");
+function transformName(name: string, delimiter: string) {
+	return name.replaceAll(" ", delimiter);
 }
 
 /**
@@ -44,7 +45,7 @@ export function avatar({ name, width, height }: AvatarOptions) {
 	if (typeof width === "number") urlSearchParams.set("w", String(width));
 	if (typeof height === "number") urlSearchParams.set("h", String(height));
 
-	return `https://secure.runescape.com/m=avatar-rs/${transformName(name)}/chat.png${
+	return `https://secure.runescape.com/m=avatar-rs/${transformName(name, "%20")}/chat.png${
 		String(urlSearchParams) ? `?${urlSearchParams}` : ""
 	}`;
 }
@@ -76,9 +77,9 @@ export interface ClanPageOptions {
  */
 export function clanPage({ clan }: ClanPageOptions) {
 	return {
-		[ClanPage.RuneScape]: `https://services.runescape.com/m=clan-home/clan/${clan}`,
-		[ClanPage.RuneInfo]: `https://runeinfo.com/clan/${clan}`,
-		[ClanPage.RunePixels]: `https://runepixels.com/clans/${clan}`,
+		[ClanPage.RuneScape]: `https://services.runescape.com/m=clan-home/clan/${transformName(clan, "%20")}`,
+		[ClanPage.RuneInfo]: `https://runeinfo.com/clan/${transformName(clan, "%20")}`,
+		[ClanPage.RunePixels]: `https://runepixels.com/clans/${transformName(clan, "-")}`,
 	};
 }
 
@@ -111,13 +112,16 @@ export interface PlayerPageOptions {
  */
 export function playerPage({ name }: PlayerPageOptions) {
 	const urlSearchParams = new URLSearchParams();
-	urlSearchParams.set("user1", name);
+	urlSearchParams.set("user1", transformName(name, "%20"));
 
 	return {
 		[PlayerPage.RuneScape]: `https://secure.runescape.com/m=hiscore/compare?${urlSearchParams}`,
-		[PlayerPage.RuneMetrics]: `https://apps.runescape.com/runemetrics/app/overview/player/${name}`,
-		[PlayerPage.RuneInfo]: `https://runeinfo.com/profile/${name}`,
-		[PlayerPage.RunePixels]: `https://runepixels.com/players/${name}/skills`,
-		[PlayerPage.RuneTracker]: `https://runetracker.org/track-${transformName(name)}`,
+		[PlayerPage.RuneMetrics]: `https://apps.runescape.com/runemetrics/app/overview/player/${transformName(
+			name,
+			"%20",
+		)}`,
+		[PlayerPage.RuneInfo]: `https://runeinfo.com/profile/${transformName(name, "%20")}`,
+		[PlayerPage.RunePixels]: `https://runepixels.com/players/${transformName(name, "-")}`,
+		[PlayerPage.RuneTracker]: `https://runetracker.org/track-${transformName(name, "+")}`,
 	};
 }
