@@ -50,42 +50,36 @@ export function avatar({ name, width, height }: AvatarOptions) {
 }
 
 /**
- * Represents what may provide a clan page.
+ * Represents what may provide a clan's home page.
  */
 export enum ClanPage {
 	RuneScape = "RuneScape",
+	RuneInfo = "RuneInfo",
 	RunePixels = "Runepixels",
 }
 
 /**
- * Represents the options to provide for retrieving a clan page.
+ * Represents the options to provide for retrieving clan home pages.
  */
 export interface ClanPageOptions {
 	/**
 	 * The clan.
 	 */
 	clan: string;
-	/**
-	 * Where the clan page should be retrieved from.
-	 *
-	 * @defaultValue `ClanPage.RuneScape`
-	 */
-	source?: ClanPage;
 }
 
 /**
- * Retrieves a clan page.
+ * Retrieve a clan's home pages.
  *
  * @param options - The options to provide
- * @returns A link to a clan's home page.
+ * @returns An object containg sources to their links.
  */
-export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions) {
-	switch (source) {
-		case ClanPage.RuneScape:
-			return `https://services.runescape.com/m=clan-home/clan/${clan}`;
-		case ClanPage.RunePixels:
-			return `https://runepixels.com/clans/${clan}/about`;
-	}
+export function clanPage({ clan }: ClanPageOptions) {
+	return {
+		[ClanPage.RuneScape]: `https://services.runescape.com/m=clan-home/clan/${clan}`,
+		[ClanPage.RuneInfo]: `https://runeinfo.com/clan/${clan}`,
+		[ClanPage.RunePixels]: `https://runepixels.com/clans/${clan}`,
+	};
 }
 
 /**
@@ -94,44 +88,36 @@ export function clanPage({ clan, source = ClanPage.RuneScape }: ClanPageOptions)
 export enum PlayerPage {
 	RuneScape = "RuneScape",
 	RuneMetrics = "RuneMetrics",
-	RuneTracker = "RuneTracker",
+	RuneInfo = "RuneInfo",
 	RunePixels = "Runepixels",
+	RuneTracker = "RuneTracker",
 }
 
 /**
- * Represents the options to provide for retrieving a player's page.
+ * Represents the options to provide for retrieving player pages.
  */
 export interface PlayerPageOptions {
 	/**
 	 * The player's name.
 	 */
 	name: string;
-	/**
-	 * Where the player's page should be retrieved from.
-	 *
-	 * @defaultValue `PlayerPage.RuneScape`
-	 */
-	source?: PlayerPage;
 }
 
 /**
- * Retrieves a player's page.
+ * Retrieves a player's pages.
  *
  * @param options - The options to provide
- * @returns A link to the player's page.
+ * @returns An object containg sources to their links.
  */
-export function playerPage({ name, source = PlayerPage.RuneScape }: PlayerPageOptions) {
-	switch (source) {
-		case PlayerPage.RuneScape:
-			// eslint-disable-next-line no-case-declarations
-			const urlSearchParams = new URLSearchParams();
-			urlSearchParams.set("user1", name);
-			return `https://secure.runescape.com/m=hiscore/compare?${urlSearchParams}`;
-		case PlayerPage.RuneMetrics:
-			return `https://apps.runescape.com/runemetrics/app/overview/player/${name}`;
-		case PlayerPage.RuneTracker:
-			return `https://runetracker.org/track-${transformName(name)}`;
-		case PlayerPage.RunePixels:
-			return `https://runepixels.com/players/${name}/skills`;
-	}
+export function playerPage({ name }: PlayerPageOptions) {
+	const urlSearchParams = new URLSearchParams();
+	urlSearchParams.set("user1", name);
+
+	return {
+		[PlayerPage.RuneScape]: `https://secure.runescape.com/m=hiscore/compare?${urlSearchParams}`,
+		[PlayerPage.RuneMetrics]: `https://apps.runescape.com/runemetrics/app/overview/player/${name}`,
+		[PlayerPage.RuneInfo]: `https://runeinfo.com/profile/${name}`,
+		[PlayerPage.RunePixels]: `https://runepixels.com/players/${name}/skills`,
+		[PlayerPage.RuneTracker]: `https://runetracker.org/track-${transformName(name)}`,
+	};
 }
