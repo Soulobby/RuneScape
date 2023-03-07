@@ -72,7 +72,7 @@ export interface ClanPageOptions {
  * Retrieve a clan's home pages.
  *
  * @param options - The options to provide
- * @returns An object containg sources to their links.
+ * @returns An object containing sources to their links.
  */
 export function clanPage({ clan }: ClanPageOptions) {
 	return {
@@ -107,7 +107,7 @@ export interface PlayerPageOptions {
  * Retrieves a player's pages.
  *
  * @param options - The options to provide
- * @returns An object containg sources to their links.
+ * @returns An object containing sources to their links.
  */
 export function playerPage({ name }: PlayerPageOptions) {
 	const urlSearchParams = new URLSearchParams();
