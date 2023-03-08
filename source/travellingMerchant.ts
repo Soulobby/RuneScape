@@ -131,7 +131,7 @@ function slot3(offset = 0) {
 }
 
 /**
- * Returns the current stock for the travelling merchant.
+ * Returns the stock for the travelling merchant.
  *
  * @param offset - How many days to offset the result.
  * @returns An array containing the stock.
