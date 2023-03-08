@@ -10,7 +10,7 @@ export enum Jewel {
 
 /**
  * Returns the accessible jewel.
- *  
+ *
  * @param offset - How many days to offset the result.
  * @returns The accessible jewel.
  */
