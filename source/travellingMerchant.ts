@@ -3,7 +3,7 @@ import { nextInt, runedate } from "./utility.js";
 /**
  * Represents an item used in the shop.
  */
-export const enum Item {
+export enum Item {
 	AdvancedPulseCore = "Advanced pulse core",
 	AnimaCrystal = "Anima crystal",
 	BarrelOfBait = "Barrel of bait",
