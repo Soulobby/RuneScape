@@ -80,6 +80,15 @@ const SLOTS = {
 	],
 } as const;
 
+/**
+ * Retrieves the index used to locate an item for a slot.
+ *
+ * @param runedate - The Runedate.
+ * @param n1 - The first number.
+ * @param n2 - The second number.
+ * @returns An index used to locate an item for a slot.
+ * @internal
+ */
 function getSlots(runedate: number, n1: number, n2: bigint) {
 	const seed = runedate * 2 ** 32 + (runedate % n1);
 	return nextInt(BigInt(seed), n2);
