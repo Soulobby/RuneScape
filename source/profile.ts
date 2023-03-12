@@ -246,14 +246,14 @@ export async function profile({ name, activities, requestOptions }: ProfileOptio
 	urlSearchParams.set("user", name);
 	if (typeof activities === "number") urlSearchParams.set("activities", String(activities));
 
-	const json = (await request(
+	const data = await request(
 		`https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}`,
 		requestOptions,
-	).then(async ({ body }) => body.json())) as RawProfile | ProfileError;
+	);
 
-	if ("error" in json) {
-		throw new Error(json.error);
-	}
+	if (data.statusCode !== 200) throw new Error(`[${data.statusCode}] Error fetching RuneMetrics profile data.`);
+	const json = (await data.body.json()) as RawProfile | ProfileError;
+	if ("error" in json) throw new Error(json.error);
 
 	const {
 		magic,

@@ -451,10 +451,9 @@ export async function questDetails({ name, requestOptions }: QuestDetailsOptions
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 
-	const { quests, loggedIn } = (await request(
-		`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`,
-		requestOptions,
-	).then(async ({ body }) => body.json())) as RawQuestDetail;
+	const data = await request(`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`, requestOptions);
+	if (data.statusCode !== 200) throw new Error(`[${data.statusCode}] Error fetching quests data.`);
+	const { quests, loggedIn } = (await data.body.json()) as RawQuestDetail;
 
 	return {
 		quests,
