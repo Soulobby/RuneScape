@@ -9,7 +9,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Soulobby/RuneScape"
+		"url": "https://github.com/Soulobby/RuneScape.git"
 	},
 	"license": "MIT",
 	"author": "Jiralite",
