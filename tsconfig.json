@@ -17,7 +17,7 @@
 		"declaration": true,
 		"declarationMap": true,
 		"importHelpers": true,
-		"importsNotUsedAsValues": "error",
+		"verbatimModuleSyntax": true,
 		"inlineSources": true,
 		"newLine": "lf",
 		"noEmitHelpers": true,
