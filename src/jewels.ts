@@ -1,4 +1,4 @@
-import { nextInt, runedate } from "./utility.js";
+import { nextInt, runedate } from "./utility/utility.js";
 
 /**
  * The two jewels behind doors.

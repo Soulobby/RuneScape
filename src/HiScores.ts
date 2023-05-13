@@ -1,5 +1,6 @@
 import { URLSearchParams } from "node:url";
 import { request } from "undici";
+import { RuneScapeAPIError } from "./utility/index.js";
 
 /**
  * Represents the skills in RuneScape.
@@ -202,8 +203,9 @@ export interface HiScoreOptions {
 export async function hiScore({ name, requestOptions }: HiScoreOptions): Promise<HiScore> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("player", name);
-	const data = await request(`https://secure.runescape.com/m=hiscore/index_lite.ws?${urlSearchParams}`, requestOptions);
-	if (data.statusCode !== 200) throw new Error(`[${data.statusCode}] Error fetching HiScore data.`);
+	const url = `https://secure.runescape.com/m=hiscore/index_lite.ws?${urlSearchParams}` as const;
+	const data = await request(url, requestOptions);
+	if (data.statusCode !== 200) throw new RuneScapeAPIError("Error fetching HiScore data.", data.statusCode, url);
 	const html = await data.body.text();
 	const dataLine = html.split("\n").map((line) => line.split(","));
 

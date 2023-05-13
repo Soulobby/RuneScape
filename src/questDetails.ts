@@ -1,5 +1,6 @@
 import { URLSearchParams } from "node:url";
 import { request } from "undici";
+import { RuneScapeAPIError } from "./utility/index.js";
 
 interface RawQuestDetail {
 	loggedIn: `${boolean}`;
@@ -450,9 +451,9 @@ export interface QuestDetailsOptions {
 export async function questDetails({ name, requestOptions }: QuestDetailsOptions): Promise<QuestDetails> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
-
-	const data = await request(`https://apps.runescape.com/runemetrics/quests?${urlSearchParams}`, requestOptions);
-	if (data.statusCode !== 200) throw new Error(`[${data.statusCode}] Error fetching quests data.`);
+	const url = `https://apps.runescape.com/runemetrics/quests?${urlSearchParams}` as const;
+	const data = await request(url, requestOptions);
+	if (data.statusCode !== 200) throw new RuneScapeAPIError("Error fetching quest data.", data.statusCode, url);
 	const { quests, loggedIn } = (await data.body.json()) as RawQuestDetail;
 
 	return {
