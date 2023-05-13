@@ -2,6 +2,7 @@ import { URLSearchParams } from "node:url";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import { request } from "undici";
+import { ErrorCode, RuneScapeAPIError, RuneScapeError } from "./utility/index.js";
 
 interface RawProfile {
 	magic: number;
@@ -27,8 +28,8 @@ interface RawProfile {
  */
 const enum ProfileErrorType {
 	NotAMember = "NOT_A_MEMBER",
-	Private = "PROFILE_PRIVATE",
-	Unknown = "NO_PROFILE",
+	ProfilePrivate = "PROFILE_PRIVATE",
+	NoProfile = "NO_PROFILE",
 }
 
 /**
@@ -246,15 +247,34 @@ export async function profile({ name, activities, requestOptions }: ProfileOptio
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 	if (typeof activities === "number") urlSearchParams.set("activities", String(activities));
+	const url = `https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}` as const;
+	const data = await request(url, requestOptions);
 
-	const data = await request(
-		`https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}`,
-		requestOptions,
-	);
+	if (data.statusCode !== 200) {
+		throw new RuneScapeAPIError("Error fetching RuneMetrics profile data.", data.statusCode, url);
+	}
 
-	if (data.statusCode !== 200) throw new Error(`[${data.statusCode}] Error fetching RuneMetrics profile data.`);
 	const json = (await data.body.json()) as RawProfile | ProfileError;
-	if ("error" in json) throw new Error(json.error);
+
+	if ("error" in json) {
+		let code;
+
+		switch (json.error) {
+			case ProfileErrorType.NotAMember:
+				code = ErrorCode.ProfileNotAMember;
+				break;
+			case ProfileErrorType.ProfilePrivate:
+				code = ErrorCode.ProfilePrivate;
+				break;
+			case ProfileErrorType.NoProfile:
+				code = ErrorCode.ProfileNone;
+				break;
+			default:
+				code = ErrorCode.ProfileError;
+		}
+
+		throw new RuneScapeError(code, json.error, url);
+	}
 
 	const {
 		magic,
