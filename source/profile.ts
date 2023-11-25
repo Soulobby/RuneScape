@@ -68,7 +68,7 @@ export interface ProfileActivity {
 	 */
 	details: string;
 	/**
-	 * The shortened variant of the {@link details}.
+	 * The shortened variant of the {@link ProfileActivity.details}.
 	 *
 	 * @example "I killed 2 tormented demons."
 	 */
@@ -254,7 +254,7 @@ export async function profile({ name, activities, requestOptions }: ProfileOptio
 		throw new RuneScapeAPIError("Error fetching RuneMetrics profile data.", data.statusCode, url);
 	}
 
-	const json = (await data.body.json()) as RawProfile | ProfileError;
+	const json = (await data.body.json()) as ProfileError | RawProfile;
 
 	if ("error" in json) {
 		let code;

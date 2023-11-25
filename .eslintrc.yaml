@@ -1,5 +1,5 @@
 root: true
-ignorePatterns: dist
+ignorePatterns: distribution
 parserOptions:
   project: ./tsconfig.json
 env:

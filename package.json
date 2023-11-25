@@ -14,28 +14,30 @@
 	"license": "MIT",
 	"author": "Jiralite",
 	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./distribution/index.js",
+	"types": "./distribution/index.d.ts",
 	"files": [
-		"dist"
+		"distribution"
 	],
 	"scripts": {
+		"test": "tsc --noEmit",
 		"build": "tsup",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
-		"prepack": "pnpm run build && pnpm run lint"
+		"prepack": "pnpm run build && pnpm run lint",
+		"update": "pnpm update --interactive --latest"
 	},
 	"dependencies": {
-		"dayjs": "^1.11.7",
-		"undici": "^5.22.0"
+		"dayjs": "^1.11.10",
+		"undici": "^5.28.0"
 	},
 	"devDependencies": {
-		"@types/node": "^18.16.3",
-		"eslint": "^8.39.0",
-		"eslint-config-neon": "^0.1.47",
-		"prettier": "^2.8.8",
-		"tsup": "^6.7.0",
-		"typescript": "^5.0.4"
+		"@types/node": "^18.18.13",
+		"eslint": "^8.54.0",
+		"eslint-config-neon": "^0.1.57",
+		"prettier": "^3.1.0",
+		"tsup": "^8.0.1",
+		"typescript": "^5.3.2"
 	},
 	"packageManager": "pnpm@8.10.3"
 }

@@ -39,7 +39,7 @@ export enum Skill {
 /**
  * Represents the data of a HiScore skill.
  */
-export interface HiScoreSkill<T extends "Total" | Skill> {
+export interface HiScoreSkill<T extends Skill | "Total"> {
 	/**
 	 * The name of the skill.
 	 */

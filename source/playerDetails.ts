@@ -20,7 +20,7 @@ export interface PlayerDetail {
 	/**
 	 * Whether the title is suffixed.
 	 *
-	 * @remarks Since {@link title} appears to always be `null`, this also appears to always be `false`.
+	 * @remarks Since {@link PlayerDetail.title} appears to always be `null`, this also appears to always be `false`.
 	 */
 	isSuffix: boolean;
 	/**

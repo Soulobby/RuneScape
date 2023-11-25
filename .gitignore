@@ -2,4 +2,4 @@
 .env
 .eslintcache
 node_modules/
-dist/
+distribution/
