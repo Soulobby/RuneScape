@@ -5,6 +5,7 @@
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
 	"editor.detectIndentation": true,
+	"npm.packageManager": "pnpm",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.preferences.importModuleSpecifierEnding": "js",
 	"typescript.tsdk": "node_modules/typescript/lib"

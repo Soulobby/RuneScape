@@ -23,7 +23,7 @@
 		"build": "tsup",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
-		"prepack": "npm run-script build && npm run-script lint"
+		"prepack": "pnpm run build && pnpm run lint"
 	},
 	"dependencies": {
 		"dayjs": "^1.11.7",
@@ -36,5 +36,6 @@
 		"prettier": "^2.8.8",
 		"tsup": "^6.7.0",
 		"typescript": "^5.0.4"
-	}
+	},
+	"packageManager": "pnpm@8.10.3"
 }
