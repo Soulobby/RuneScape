@@ -64,7 +64,11 @@ export async function playerDetails({ names, abortSignal }: PlayerDetailsOptions
 	urlSearchParams.set("names", JSON.stringify(names));
 	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
 
-	const response = await makeRequest(`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`, abortSignal)
+	const response = await makeRequest(
+		`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`,
+		abortSignal,
+	);
+
 	const body = await response.text();
 	const json: RawPlayerDetail[] = JSON.parse(body.slice(body.indexOf("["), body.indexOf("]") + 1));
 
