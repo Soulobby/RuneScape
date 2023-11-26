@@ -293,8 +293,6 @@ export async function profile({ name, activities, abortSignal }: ProfileOptions)
 		loggedIn,
 	} = body;
 
-	console.log(body);
-
 	return {
 		magic,
 		questsStarted: questsstarted,
