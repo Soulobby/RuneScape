@@ -1,4 +1,3 @@
-import { URLSearchParams } from "node:url";
 import { makeRequest } from "./makeRequest.js";
 import { RuneScapeAPIError } from "./utility/index.js";
 

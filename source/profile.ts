@@ -1,4 +1,3 @@
-import { URLSearchParams } from "node:url";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import { makeRequest } from "./makeRequest.js";
