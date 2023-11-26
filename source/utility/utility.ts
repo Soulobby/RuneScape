@@ -1,5 +1,3 @@
-import { URLSearchParams } from "node:url";
-
 const MULTI = 0x5deece66dn as const;
 const MASK = 281_474_976_710_656n as const;
 const c0 = 0xe66dn as const;
