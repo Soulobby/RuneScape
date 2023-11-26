@@ -33,7 +33,7 @@ export enum Skill {
 	Strength = "Strength",
 	Summoning = "Summoning",
 	Thieving = "Thieving",
-	Woodcutting = "Woodcutting"
+	Woodcutting = "Woodcutting",
 }
 
 /**

@@ -109,7 +109,7 @@ export function avatar({ name, width, height }: AvatarOptions) {
 export enum ClanPage {
 	RuneInfo = "RuneInfo",
 	RunePixels = "Runepixels",
-	RuneScape = "RuneScape"
+	RuneScape = "RuneScape",
 }
 
 /**
