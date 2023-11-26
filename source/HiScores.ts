@@ -206,8 +206,8 @@ export async function hiScore({ name, abortSignal }: HiScoreOptions): Promise<Hi
 	const url = `https://secure.runescape.com/m=hiscore/index_lite.ws?${urlSearchParams}` as const;
 	const response = await makeRequest(url, abortSignal);
 	if (!response.ok) throw new RuneScapeAPIError("Error fetching HiScore data.", response.status, url);
-	const html = await response.text();
-	const dataLine = html.split("\n").map((line) => line.split(","));
+	const body = await response.text();
+	const dataLine = body.split("\n").map((line) => line.split(","));
 
 	return {
 		total: {
