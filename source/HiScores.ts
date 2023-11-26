@@ -1,5 +1,5 @@
 import { URLSearchParams } from "node:url";
-import { request } from "undici";
+import { makeRequest } from "./makeRequest.js";
 import { RuneScapeAPIError } from "./utility/index.js";
 
 /**
@@ -189,9 +189,9 @@ export interface HiScoreOptions {
 	 */
 	name: string;
 	/**
-	 * The options for the request.
+	 * The abort signal for the fetch.
 	 */
-	requestOptions?: Parameters<typeof request>[1];
+	abortSignal?: AbortSignal | undefined;
 }
 
 /**
@@ -200,14 +200,14 @@ export interface HiScoreOptions {
  * @param options - The options to provide
  * @returns The HiScore data of the player.
  */
-export async function hiScore({ name, requestOptions }: HiScoreOptions): Promise<HiScore> {
+export async function hiScore({ name, abortSignal }: HiScoreOptions): Promise<HiScore> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("player", name);
 	const url = `https://secure.runescape.com/m=hiscore/index_lite.ws?${urlSearchParams}` as const;
-	const data = await request(url, requestOptions);
-	if (data.statusCode !== 200) throw new RuneScapeAPIError("Error fetching HiScore data.", data.statusCode, url);
-	const html = await data.body.text();
-	const dataLine = html.split("\n").map((line) => line.split(","));
+	const response = await makeRequest(url, abortSignal);
+	if (!response.ok) throw new RuneScapeAPIError("Error fetching HiScore data.", response.status, url);
+	const body = await response.text();
+	const dataLine = body.split("\n").map((line) => line.split(","));
 
 	return {
 		total: {
