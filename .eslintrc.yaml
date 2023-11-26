@@ -7,7 +7,6 @@ env:
 extends:
   - neon/common
   - neon/module
-  - neon/node
   - neon/typescript
   - neon/prettier
 plugins:

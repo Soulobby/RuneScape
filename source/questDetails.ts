@@ -1,5 +1,4 @@
-import { URLSearchParams } from "node:url";
-import { request } from "undici";
+import { makeRequest } from "./makeRequest.js";
 import { RuneScapeAPIError } from "./utility/index.js";
 
 interface RawQuestDetail {
@@ -437,9 +436,9 @@ export interface QuestDetailsOptions {
 	 */
 	name: string;
 	/**
-	 * The options for the request.
+	 * The abort signal for the fetch.
 	 */
-	requestOptions?: Parameters<typeof request>[1];
+	abortSignal?: AbortSignal;
 }
 
 /**
@@ -448,13 +447,14 @@ export interface QuestDetailsOptions {
  * @param options - The options to provide
  * @returns An object containing the quest data.
  */
-export async function questDetails({ name, requestOptions }: QuestDetailsOptions): Promise<QuestDetails> {
+export async function questDetails({ name, abortSignal }: QuestDetailsOptions): Promise<QuestDetails> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 	const url = `https://apps.runescape.com/runemetrics/quests?${urlSearchParams}` as const;
-	const data = await request(url, requestOptions);
-	if (data.statusCode !== 200) throw new RuneScapeAPIError("Error fetching quest data.", data.statusCode, url);
-	const { quests, loggedIn } = (await data.body.json()) as RawQuestDetail;
+	const response = await makeRequest(url, abortSignal);
+	if (!response.ok) throw new RuneScapeAPIError("Error fetching quest data.", response.status, url);
+	const body = (await response.json()) as RawQuestDetail;
+	const { quests, loggedIn } = body;
 
 	return {
 		quests,

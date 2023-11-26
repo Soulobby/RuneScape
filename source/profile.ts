@@ -1,7 +1,7 @@
 import { URLSearchParams } from "node:url";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
-import { request } from "undici";
+import { makeRequest } from "./makeRequest.js";
 import { ErrorCode, RuneScapeAPIError, RuneScapeError } from "./utility/index.js";
 
 interface RawProfile {
@@ -127,7 +127,7 @@ export interface ProfileSkills {
 	/**
 	 * The rank this skill is in the HiScores.
 	 */
-	rank: number;
+	rank: number | undefined;
 	/**
 	 * The id of this skill.
 	 *
@@ -230,9 +230,9 @@ export interface ProfileOptions {
 	 */
 	activities?: number;
 	/**
-	 * The options for the request.
+	 * The abort signal for the fetch.
 	 */
-	requestOptions?: Parameters<typeof request>[1];
+	abortSignal?: AbortSignal | undefined;
 }
 
 dayjs.extend(utc);
@@ -243,23 +243,23 @@ dayjs.extend(utc);
  * @param options - The options to provide
  * @returns The profile of the player as described by RuneMetrics.
  */
-export async function profile({ name, activities, requestOptions }: ProfileOptions): Promise<Profile> {
+export async function profile({ name, activities, abortSignal }: ProfileOptions): Promise<Profile> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user", name);
 	if (typeof activities === "number") urlSearchParams.set("activities", String(activities));
 	const url = `https://apps.runescape.com/runemetrics/profile/profile?${urlSearchParams}` as const;
-	const data = await request(url, requestOptions);
+	const response = await makeRequest(url, abortSignal);
 
-	if (data.statusCode !== 200) {
-		throw new RuneScapeAPIError("Error fetching RuneMetrics profile data.", data.statusCode, url);
+	if (!response.ok) {
+		throw new RuneScapeAPIError("Error fetching RuneMetrics profile data.", response.status, url);
 	}
 
-	const json = (await data.body.json()) as ProfileError | RawProfile;
+	const body = (await response.json()) as ProfileError | RawProfile;
 
-	if ("error" in json) {
+	if ("error" in body) {
 		let code;
 
-		switch (json.error) {
+		switch (body.error) {
 			case ProfileErrorType.NotAMember:
 				code = ErrorCode.ProfileNotAMember;
 				break;
@@ -273,7 +273,7 @@ export async function profile({ name, activities, requestOptions }: ProfileOptio
 				code = ErrorCode.ProfileError;
 		}
 
-		throw new RuneScapeError(code, json.error, url);
+		throw new RuneScapeError(code, body.error, url);
 	}
 
 	const {
@@ -291,7 +291,9 @@ export async function profile({ name, activities, requestOptions }: ProfileOptio
 		melee,
 		combatlevel,
 		loggedIn,
-	} = json;
+	} = body;
+
+	console.log(body);
 
 	return {
 		magic,

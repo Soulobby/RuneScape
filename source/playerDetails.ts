@@ -1,5 +1,5 @@
 import { URLSearchParams } from "node:url";
-import { request } from "undici";
+import { makeRequest } from "./makeRequest.js";
 
 interface RawPlayerDetail {
 	clan?: string;
@@ -48,9 +48,9 @@ export interface PlayerDetailsOptions {
 	 */
 	names: string[];
 	/**
-	 * The options for the request.
+	 * The abort signal for the fetch.
 	 */
-	requestOptions?: Parameters<typeof request>[1];
+	abortSignal?: AbortSignal | undefined;
 }
 
 /**
@@ -59,17 +59,14 @@ export interface PlayerDetailsOptions {
  * @param options - The options to provide
  * @returns An array containing the resulting player details.
  */
-export async function playerDetails({ names, requestOptions }: PlayerDetailsOptions): Promise<PlayerDetail[]> {
+export async function playerDetails({ names, abortSignal }: PlayerDetailsOptions): Promise<PlayerDetail[]> {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("names", JSON.stringify(names));
 	urlSearchParams.set("callback", "jQuery000000000000000_0000000000");
 
-	const html = await request(
-		`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`,
-		requestOptions,
-	).then(async ({ body }) => body.text());
-
-	const json: RawPlayerDetail[] = JSON.parse(html.slice(html.indexOf("["), html.indexOf("]") + 1));
+	const response = await makeRequest(`https://secure.runescape.com/m=website-data/playerDetails.ws?${urlSearchParams}`, abortSignal)
+	const body = await response.text();
+	const json: RawPlayerDetail[] = JSON.parse(body.slice(body.indexOf("["), body.indexOf("]") + 1));
 
 	return json.map(({ isSuffix, recruiting, name, clan, title }) => ({
 		isSuffix,
