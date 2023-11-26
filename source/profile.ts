@@ -27,9 +27,9 @@ interface RawProfile {
  * @internal
  */
 const enum ProfileErrorType {
-	NotAMember = "NOT_A_MEMBER",
-	ProfilePrivate = "PROFILE_PRIVATE",
 	NoProfile = "NO_PROFILE",
+	NotAMember = "NOT_A_MEMBER",
+	ProfilePrivate = "PROFILE_PRIVATE"
 }
 
 /**

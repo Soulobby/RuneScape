@@ -16,5 +16,4 @@ rules:
   "@typescript-eslint/consistent-type-definitions": 0
   "@typescript-eslint/sort-type-union-intersection-members": 0
   "typescript-sort-keys/interface": 0
-  "typescript-sort-keys/string-enum": 0
   jsdoc/check-param-names: 0

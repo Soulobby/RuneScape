@@ -41,6 +41,10 @@ export enum QuestDifficulty {
  */
 export enum QuestStatus {
 	/**
+	 * The status of a quest being completed.
+	 */
+	Completed = "COMPLETED",
+	/**
 	 * The status of a quest not being started.
 	 */
 	NotStarted = "NOT_STARTED",
@@ -48,10 +52,6 @@ export enum QuestStatus {
 	 * The status of a quest being started.
 	 */
 	Started = "STARTED",
-	/**
-	 * The status of a quest being completed.
-	 */
-	Completed = "COMPLETED",
 }
 
 /**
@@ -62,12 +62,12 @@ export enum QuestTitle {
 	AFairyTaleIGrowingPains = "A Fairy Tale I - Growing Pains",
 	AFairyTaleIICureaQueen = "A Fairy Tale II - Cure a Queen",
 	AFairyTaleIIIBattleatOrksRift = "A Fairy Tale III - Battle at Ork's Rift",
-	Aftermath = "Aftermath",
 	AGuildOfOurOwn = "A Guild of Our Own (miniquest)",
 	AShadowoverAshdale = "A Shadow over Ashdale",
 	ASoulsBane = "A Soul's Bane",
 	ATailOfTwoCats = "A Tail of Two Cats",
 	AVoidDance = "A Void Dance",
+	Aftermath = "Aftermath",
 	AllFiredUp = "All Fired Up",
 	AnimalMagnetism = "Animal Magnetism",
 	AnotherSliceOfHAM = "Another Slice of H.A.M.",
@@ -188,8 +188,8 @@ export enum QuestTitle {
 	HeartOfStone = "Heart of Stone",
 	Heartstealer = "Heartstealer",
 	HelpingLaniakea = "Helping Laniakea",
-	HerosWelcome = "Hero's Welcome",
 	HeroesQuest = "Heroes' Quest",
+	HerosWelcome = "Hero's Welcome",
 	HolyGrail = "Holy Grail",
 	HopespearsWill = "Hopespear's Will (miniquest)",
 	HorrorfromTheDeep = "Horror from the Deep",
@@ -223,8 +223,8 @@ export enum QuestTitle {
 	MerlinsCrystal = "Merlin's Crystal",
 	MissingMyMummy = "Missing My Mummy",
 	MissingPresumedDeath = "Missing, Presumed Death",
-	MonksFriend = "Monk's Friend",
 	MonkeyMadness = "Monkey Madness",
+	MonksFriend = "Monk's Friend",
 	MountainDaughter = "Mountain Daughter",
 	MourningsEndPartI = "Mourning's End Part I",
 	MourningsEndPartII = "Mourning's End Part II",

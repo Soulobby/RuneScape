@@ -107,9 +107,9 @@ export function avatar({ name, width, height }: AvatarOptions) {
  * Represents what may provide a clan's home page.
  */
 export enum ClanPage {
-	RuneScape = "RuneScape",
 	RuneInfo = "RuneInfo",
 	RunePixels = "Runepixels",
+	RuneScape = "RuneScape"
 }
 
 /**
@@ -140,10 +140,10 @@ export function clanPage({ clan }: ClanPageOptions) {
  * Represents what may provide a player's page.
  */
 export enum PlayerPage {
-	RuneScape = "RuneScape",
-	RuneMetrics = "RuneMetrics",
 	RuneInfo = "RuneInfo",
+	RuneMetrics = "RuneMetrics",
 	RunePixels = "Runepixels",
+	RuneScape = "RuneScape",
 	RuneTracker = "RuneTracker",
 }
 
