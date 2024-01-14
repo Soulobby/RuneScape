@@ -25,19 +25,19 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
 		"prepack": "pnpm run build && pnpm run lint",
-		"update": "pnpm update --interactive --latest"
+		"update": "pnpm update --interactive --latest && pre-commit autoupdate"
 	},
 	"dependencies": {
 		"dayjs": "^1.11.10",
-		"undici": "^5.28.0"
+		"undici": "^6.3.0"
 	},
 	"devDependencies": {
-		"@types/node": "^18.18.13",
-		"eslint": "^8.54.0",
+		"@types/node": "^20.11.0",
+		"eslint": "^8.56.0",
 		"eslint-config-neon": "^0.1.57",
-		"prettier": "^3.1.0",
+		"prettier": "^3.2.2",
 		"tsup": "^8.0.1",
-		"typescript": "^5.3.2"
+		"typescript": "^5.3.3"
 	},
-	"packageManager": "pnpm@8.10.3"
+	"packageManager": "pnpm@8.14.1"
 }
