@@ -6,3 +6,4 @@ export * from "./playerDetails.js";
 export * from "./profile.js";
 export * from "./questDetails.js";
 export * from "./travellingMerchant.js";
+export * from "./wildernessFlashEvents.js";
