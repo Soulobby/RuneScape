@@ -12,7 +12,7 @@ export enum WildernessFlashEvent {
 	SpiderSwarm = "Spider Swarm",
 	/**
 	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Unnatural_Outcrop}
-	 */	
+	 */
 	UnnaturalOutcrop = "Unnatural Outcrop",
 	/**
 	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Demon_Stragglers}
@@ -66,7 +66,7 @@ const WILDERNESS_FLASH_EVENTS_LENGTH = WILDERNESS_FLASH_EVENTS.length;
 
 /**
  * Returns the Wilderness Flash Event.
- * 
+ *
  * @param offset - How many hours to offset the result.
  * @returns The Wilderness Flash Event.
  */
