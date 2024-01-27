@@ -1,5 +1,4 @@
 const INITIAL_TIMESTAMP = Date.UTC(2_022, 9, 17, 11);
-const hoursElapsed = Math.floor((Date.now() - INITIAL_TIMESTAMP) / 1_000 / 60 / 60);
 
 /* eslint-disable typescript-sort-keys/string-enum */
 /**
@@ -71,5 +70,6 @@ const WILDERNESS_FLASH_EVENTS_LENGTH = WILDERNESS_FLASH_EVENTS.length;
  * @returns The Wilderness Flash Event.
  */
 export function wildernessFlashEvent(offset = 0) {
-	return WILDERNESS_FLASH_EVENTS[(hoursElapsed + offset) % WILDERNESS_FLASH_EVENTS_LENGTH]!;
+	const hoursElapsed = Math.floor((Date.now() + 3_600_000 * offset - INITIAL_TIMESTAMP) / 1_000 / 60 / 60);
+	return WILDERNESS_FLASH_EVENTS[hoursElapsed % WILDERNESS_FLASH_EVENTS_LENGTH]!;
 }
