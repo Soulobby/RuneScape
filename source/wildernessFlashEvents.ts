@@ -71,5 +71,5 @@ const WILDERNESS_FLASH_EVENTS_LENGTH = WILDERNESS_FLASH_EVENTS.length;
  * @returns The Wilderness Flash Event.
  */
 export function wildernessFlashEvent(offset = 0) {
-	return WILDERNESS_FLASH_EVENTS[(hoursElapsed + offset) % WILDERNESS_FLASH_EVENTS_LENGTH];
+	return WILDERNESS_FLASH_EVENTS[(hoursElapsed + offset) % WILDERNESS_FLASH_EVENTS_LENGTH]!;
 }
