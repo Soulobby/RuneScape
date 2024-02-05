@@ -50,9 +50,9 @@ export enum WildernessFlashEvent {
 	 */
 	UnnaturalOutcrop = "Unnatural Outcrop",
 	/**
-	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#WildyWyrm}
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Stryke_the_Wyrm}
 	 */
-	WildyWyrm = "WildyWyrm",
+	StrykeTheWyrm = "Stryke the Wyrm",
 	/**
 	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Demon_Stragglers}
 	 */
