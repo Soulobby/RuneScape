@@ -1,26 +1,10 @@
-const INITIAL_TIMESTAMP = Date.UTC(2_022, 9, 17, 11);
+const INITIAL_TIMESTAMP = Date.UTC(2_024, 1, 5, 12);
 
 /* eslint-disable typescript-sort-keys/string-enum */
 /**
  * The kind of Wilderness Flash Event.
  */
 export enum WildernessFlashEvent {
-	/**
-	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Spider_Swarm}
-	 */
-	SpiderSwarm = "Spider Swarm",
-	/**
-	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Unnatural_Outcrop}
-	 */
-	UnnaturalOutcrop = "Unnatural Outcrop",
-	/**
-	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Demon_Stragglers}
-	 */
-	DemonStragglers = "Demon Stragglers",
-	/**
-	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Butterfly_Swarm}
-	 */
-	ButterflySwarm = "Butterfly Swarm",
 	/**
 	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#King_Black_Dragon_Rampage}
 	 */
@@ -57,6 +41,26 @@ export enum WildernessFlashEvent {
 	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Evil_Bloodwood_Tree}
 	 */
 	EvilBloodwoodTree = "Evil Bloodwood Tree",
+	/**
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Spider_Swarm}
+	 */
+	SpiderSwarm = "Spider Swarm",
+	/**
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Unnatural_Outcrop}
+	 */
+	UnnaturalOutcrop = "Unnatural Outcrop",
+	/**
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#WildyWyrm}
+	 */
+	WildyWyrm = "WildyWyrm",
+	/**
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Demon_Stragglers}
+	 */
+	DemonStragglers = "Demon Stragglers",
+	/**
+	 * @see {@link https://runescape.wiki/w/Wilderness_Flash_Events#Butterfly_Swarm}
+	 */
+	ButterflySwarm = "Butterfly Swarm",
 }
 /* eslint-enable typescript-sort-keys/string-enum */
 
@@ -66,6 +70,7 @@ const WILDERNESS_FLASH_EVENTS_LENGTH = WILDERNESS_FLASH_EVENTS.length;
 /**
  * Returns the Wilderness Flash Event.
  *
+ * @remarks Results may be inaccurate before 5th February 2024 12:00 as the sequence was modified.
  * @param offset - How many hours to offset the result.
  * @returns The Wilderness Flash Event.
  */
