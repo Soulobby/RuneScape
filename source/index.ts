@@ -1,5 +1,6 @@
 export * from "./utility/index.js";
 
+export * from "./guthixianCache.js";
 export * from "./HiScores.js";
 export * from "./jewels.js";
 export * from "./playerDetails.js";
