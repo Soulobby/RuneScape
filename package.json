@@ -29,14 +29,14 @@
 	},
 	"dependencies": {
 		"dayjs": "^1.11.10",
-		"undici": "^6.3.0"
+		"undici": "^6.6.2"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.0",
-		"eslint": "^8.56.0",
-		"eslint-config-neon": "^0.1.57",
-		"prettier": "^3.2.2",
-		"tsup": "^8.0.1",
+		"@types/node": "^20.11.20",
+		"eslint": "^8.57.0",
+		"eslint-config-neon": "^0.1.59",
+		"prettier": "^3.2.5",
+		"tsup": "^8.0.2",
 		"typescript": "^5.3.3"
 	},
 	"packageManager": "pnpm@8.14.1"
