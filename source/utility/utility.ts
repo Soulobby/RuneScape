@@ -11,7 +11,7 @@ const chunk = 65_536n as const;
  * @param offset - How many days to offset the result.
  * @returns The Runedate.
  */
-export function runedate(offset = 0) {
+export function runedate(offset = 0): number {
 	const date = new Date();
 	date.setUTCDate(date.getUTCDate() + offset);
 	const runedate = date.getTime() - Date.UTC(2_002, 1, 27);
@@ -44,7 +44,7 @@ function multiplyAvoidLimit(seed: bigint) {
  * @param repeats - How many times to repeat.
  * @internal
  */
-export function nextInt(seed: bigint, no: bigint, repeats = 1) {
+export function nextInt(seed: bigint, no: bigint, repeats = 1): bigint {
 	let computedSeed = seed ^ MULTI % MASK;
 	for (let index = 0; index < repeats; index++) computedSeed = multiplyAvoidLimit(computedSeed);
 	computedSeed >>= 17n;
@@ -91,7 +91,7 @@ export interface AvatarOptions {
  * @param options - The options to provide
  * @returns The player's avatar link.
  */
-export function avatar({ name, width, height }: AvatarOptions) {
+export function avatar({ name, width, height }: AvatarOptions): string {
 	const urlSearchParams = new URLSearchParams();
 	if (typeof width === "number") urlSearchParams.set("w", String(width));
 	if (typeof height === "number") urlSearchParams.set("h", String(height));
@@ -126,7 +126,7 @@ export interface ClanPageOptions {
  * @param options - The options to provide
  * @returns An object containing sources to their links.
  */
-export function clanPage({ clan }: ClanPageOptions) {
+export function clanPage({ clan }: ClanPageOptions): { [key in ClanPage]: string } {
 	return {
 		[ClanPage.RuneScape]: `https://services.runescape.com/m=clan-home/clan/${transformName(clan, "%20")}`,
 		[ClanPage.RuneInfo]: `https://runeinfo.com/clan/${transformName(clan, "%20")}`,
@@ -161,7 +161,7 @@ export interface PlayerPageOptions {
  * @param options - The options to provide
  * @returns An object containing sources to their links.
  */
-export function playerPage({ name }: PlayerPageOptions) {
+export function playerPage({ name }: PlayerPageOptions): { [key in PlayerPage]: string } {
 	const urlSearchParams = new URLSearchParams();
 	urlSearchParams.set("user1", transformName(name, "%20"));
 

@@ -1,0 +1,5 @@
+{
+	"name": "@runescape/runescape",
+	"version": "0.9.0",
+	"exports": "./source/index.ts"
+}

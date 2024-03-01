@@ -106,7 +106,7 @@ export class RuneScapeError extends Error {
 		this.url = url;
 	}
 
-	public override get name() {
+	public override get name(): string {
 		return `${super.name} [${this.rawCode}]`;
 	}
 }

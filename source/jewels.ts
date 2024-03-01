@@ -14,7 +14,7 @@ export enum Jewel {
  * @param offset - How many days to offset the result.
  * @returns The accessible jewel.
  */
-export function jewel(offset = 0) {
+export function jewel(offset = 0): Jewel | null {
 	const slot = nextInt(BigInt(runedate(offset)) * 2n ** 32n, 5n);
 
 	switch (slot) {
