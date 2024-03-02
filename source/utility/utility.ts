@@ -8,13 +8,11 @@ const chunk = 65_536n as const;
 /**
  * Returns the current Runedate.
  *
- * @param offset - How many days to offset the result.
+ * @param timestamp - A Unix timestamp.
  * @returns The Runedate.
  */
-export function runedate(offset = 0): number {
-	const date = new Date();
-	date.setUTCDate(date.getUTCDate() + offset);
-	const runedate = date.getTime() - Date.UTC(2_002, 1, 27);
+export function runedate(timestamp: number): number {
+	const runedate = timestamp - Date.UTC(2_002, 1, 27);
 	return Math.floor(runedate / 86_400_000);
 }
 

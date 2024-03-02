@@ -70,11 +70,11 @@ const WILDERNESS_FLASH_EVENTS_LENGTH = WILDERNESS_FLASH_EVENTS.length;
 /**
  * Returns the Wilderness Flash Event.
  *
- * @remarks Results may be inaccurate before 5th February 2024 12:00 as the sequence was modified.
- * @param offset - How many hours to offset the result.
+ * @remarks The hour will be checked. Results may be inaccurate before 5th February 2024 12:00 as the sequence was modified.
+ * @param timestamp - A Unix timestamp.
  * @returns The Wilderness Flash Event.
  */
-export function wildernessFlashEvent(offset = 0): WildernessFlashEvent {
-	const hoursElapsed = Math.floor((Date.now() + 3_600_000 * offset - INITIAL_TIMESTAMP) / 1_000 / 60 / 60);
+export function wildernessFlashEvent(timestamp: number): WildernessFlashEvent {
+	const hoursElapsed = Math.floor((timestamp - INITIAL_TIMESTAMP) / 1_000 / 60 / 60);
 	return WILDERNESS_FLASH_EVENTS[hoursElapsed % WILDERNESS_FLASH_EVENTS_LENGTH]!;
 }

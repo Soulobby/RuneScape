@@ -1,4 +1,4 @@
-import { nextInt, runedate } from "./utility/utility.js";
+import { nextInt, runedate as utilityRunedate } from "./utility/utility.js";
 
 /**
  * Represents an item used in the shop.
@@ -97,47 +97,48 @@ function getSlots(runedate: number, n1: number, n2: bigint) {
 /**
  * Returns the first slot of the stock.
  *
- * @param offset - How many days to offset the result.
+ * @param runedate - A Runedate.
  * @returns The first slot of the stock.
  * @internal
  */
-function slot1(offset = 0) {
-	const index = Number(getSlots(runedate(offset), 3, 19n));
+function slot1(runedate: number) {
+	const index = Number(getSlots(runedate, 3, 19n));
 	return SLOTS[1][index];
 }
 
 /**
  * Returns the second slot of the stock.
  *
- * @param offset - How many days to offset the result.
+ * @param runedate - A Runedate.
  * @returns The second slot of the stock.
  * @internal
  */
-function slot2(offset = 0) {
-	const index = Number(getSlots(runedate(offset), 8, 19n));
+function slot2(runedate: number) {
+	const index = Number(getSlots(runedate, 8, 19n));
 	return SLOTS[2][index];
 }
 
 /**
  * Returns the third slot of the stock.
  *
- * @param offset - How many days to offset the result.
+ * @param runedate - A Runedate.
  * @returns The third slot of the stock.
  * @internal
  */
-function slot3(offset = 0) {
-	const index = Number(getSlots(runedate(offset), 5, 13n));
+function slot3(runedate: number) {
+	const index = Number(getSlots(runedate, 5, 13n));
 	return SLOTS[3][index];
 }
 
 /**
  * Returns the stock for the travelling merchant.
  *
- * @param offset - How many days to offset the result.
+ * @param timestamp - A Unix timestamp.
  * @returns An array containing the stock.
  */
 export function stock(
-	offset = 0,
+	timestamp: number,
 ): [(typeof SLOT_1_AND_2)[number], (typeof SLOT_1_AND_2)[number], (typeof SLOTS)[3][number]] {
-	return [slot1(offset)!, slot2(offset)!, slot3(offset)!];
+	const currentRunedate = utilityRunedate(timestamp);
+	return [slot1(currentRunedate)!, slot2(currentRunedate)!, slot3(currentRunedate)!];
 }
