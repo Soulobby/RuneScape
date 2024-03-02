@@ -9,3 +9,4 @@ export * from "./questDetails.js";
 export * from "./raven.js";
 export * from "./travellingMerchant.js";
 export * from "./wildernessFlashEvents.js";
+export * from "./wildernessWarbands.js";
