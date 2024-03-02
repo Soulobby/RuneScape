@@ -1,10 +1,11 @@
 /**
  * Returns if a Guthixian Cache will be a full reward.
  *
- * @param offset - How many hours to offset the result.
+ * @remarks The hour will be checked.
+ * @param timestamp - A Unix timestamp.
  * @returns Whether the occurrence will be a full reward.
  * @see {@link https://runescape.wiki/w/Guthixian_Cache}
  */
-export function guthixianCache(offset = 0): boolean {
-	return (new Date().getUTCHours() + offset) % 3 === 0;
+export function guthixianCache(timestamp: number): boolean {
+	return new Date(timestamp).getUTCHours() % 3 === 0;
 }

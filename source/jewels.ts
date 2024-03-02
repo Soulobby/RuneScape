@@ -11,11 +11,11 @@ export enum Jewel {
 /**
  * Returns the accessible jewel.
  *
- * @param offset - How many days to offset the result.
+ * @param timestamp - A Unix timestamp.
  * @returns The accessible jewel.
  */
-export function jewel(offset = 0): Jewel | null {
-	const slot = nextInt(BigInt(runedate(offset)) * 2n ** 32n, 5n);
+export function jewel(timestamp: number): Jewel | null {
+	const slot = nextInt(BigInt(runedate(timestamp)) * 2n ** 32n, 5n);
 
 	switch (slot) {
 		case 0n:
