@@ -12,8 +12,7 @@ const chunk = 65_536n as const;
  * @returns The Runedate.
  */
 export function runedate(timestamp: number): number {
-	const runedate = timestamp - Date.UTC(2_002, 1, 27);
-	return Math.floor(runedate / 86_400_000);
+	return Math.floor(((timestamp - Date.UTC(2_002, 1, 27)) / 86_400_000) * 100) / 100;
 }
 
 /**
